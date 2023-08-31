@@ -1,0 +1,23 @@
+#-----------------------------------------------------------
+# Vivado v2019.2 (64-bit)
+# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+# Start of session at: Thu Aug 31 20:42:38 2023
+# Process ID: 25724
+# Current directory: E:/VMshare/e203/9-CICC2623+吾开天工/上板FPGA的系统vivado工程/git/jichuang
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent19380 E:\VMshare\e203\9-CICC2623+吾开天工\上板FPGA的系统vivado工程\git\jichuang\jichuang.xpr
+# Log file: E:/VMshare/e203/9-CICC2623+吾开天工/上板FPGA的系统vivado工程/git/jichuang/vivado.log
+# Journal file: E:/VMshare/e203/9-CICC2623+吾开天工/上板FPGA的系统vivado工程/git/jichuang\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project E:/VMshare/e203/9-CICC2623+吾开天工/上板FPGA的系统vivado工程/git/jichuang/jichuang.xpr
+INFO: [Project 1-313] Project file moved from 'E:/VMshare/e203/script/jichuang' since last save.
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'D:/xlinx/Vivado/2019.2/data/ip'.
+open_project: Time (s): cpu = 00:00:19 ; elapsed = 00:00:11 . Memory (MB): peak = 974.238 ; gain = 302.172
+update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Thu Aug 31 20:43:22 2023...
