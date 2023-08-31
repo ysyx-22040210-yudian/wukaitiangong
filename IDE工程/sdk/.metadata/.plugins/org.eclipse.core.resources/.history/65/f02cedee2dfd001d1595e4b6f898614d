@@ -1,0 +1,140 @@
+// See LICENSE for license details.
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include "hbird_sdk_soc.h"
+
+#include "insn.h"
+
+void print_misa(void)
+{
+    CSR_MISA_Type misa_bits = (CSR_MISA_Type) __RV_CSR_READ(CSR_MISA);
+    static char misa_chars[30];
+    uint8_t index = 0;
+    if (misa_bits.b.mxl == 1) {
+        misa_chars[index++] = '3';
+        misa_chars[index++] = '2';
+    } else if (misa_bits.b.mxl == 2) {
+        misa_chars[index++] = '6';
+        misa_chars[index++] = '4';
+    } else if (misa_bits.b.mxl == 3) {
+        misa_chars[index++] = '1';
+        misa_chars[index++] = '2';
+        misa_chars[index++] = '8';
+    }
+    if (misa_bits.b.i) {
+        misa_chars[index++] = 'I';
+    }
+    if (misa_bits.b.m) {
+        misa_chars[index++] = 'M';
+    }
+    if (misa_bits.b.a) {
+        misa_chars[index++] = 'A';
+    }
+    if (misa_bits.b.b) {
+        misa_chars[index++] = 'B';
+    }
+    if (misa_bits.b.c) {
+        misa_chars[index++] = 'C';
+    }
+    if (misa_bits.b.e) {
+        misa_chars[index++] = 'E';
+    }
+    if (misa_bits.b.f) {
+        misa_chars[index++] = 'F';
+    }
+    if (misa_bits.b.d) {
+        misa_chars[index++] = 'D';
+    }
+    if (misa_bits.b.q) {
+        misa_chars[index++] = 'Q';
+    }
+    if (misa_bits.b.h) {
+        misa_chars[index++] = 'H';
+    }
+    if (misa_bits.b.j) {
+        misa_chars[index++] = 'J';
+    }
+    if (misa_bits.b.l) {
+        misa_chars[index++] = 'L';
+    }
+    if (misa_bits.b.n) {
+        misa_chars[index++] = 'N';
+    }
+    if (misa_bits.b.s) {
+        misa_chars[index++] = 'S';
+    }
+    if (misa_bits.b.p) {
+        misa_chars[index++] = 'P';
+    }
+    if (misa_bits.b.t) {
+        misa_chars[index++] = 'T';
+    }
+    if (misa_bits.b.u) {
+        misa_chars[index++] = 'U';
+    }
+    if (misa_bits.b.x) {
+        misa_chars[index++] = 'X';
+    }
+
+    misa_chars[index++] = '\0';
+
+    printf("MISA: RV%s\r\n", misa_chars);
+}
+
+// 中值滤波函数
+int medianFilter(int arr[], int size) {
+    int temp;
+    int i, j;
+
+    // 使用冒泡排序对数组进行排序
+    for(i = 0; i < size-1; i++) {
+        for(j = 0; j < size-i-1; j++) {
+            if(arr[j] > arr[j+1]) {
+                // 交换元素
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+
+    // 返回中值
+    return arr[size/2];
+}
+
+int main(void)
+{
+    srand(__get_rv_cycle()  | __get_rv_instret() | __RV_CSR_READ(CSR_MCYCLE));
+    uint32_t rval = rand();
+    rv_csr_t misa = __RV_CSR_READ(CSR_MISA);
+
+    printf("MISA: 0x%lx\r\n", misa);
+    print_misa();
+
+    for (int i = 0; i < 20; i ++) {
+        printf("%d: Hello World From RISC-V Processor!\r\n", i);
+    }
+
+    int x,y;
+    int arr_x[10], arr_y[10];
+    int filter_x, filter_y;
+    int j;
+           _REG32(AXI_BASSE,0) = 1;
+
+           while(1){
+        	   for(j=0;j<10;j++){
+        		   x = _REG32A(AXI_BASSE + 4) ;
+        		   y = _REG32A(AXI_BASSE + 8) ;
+        		   arr_x[j] = x;
+        		   arr_y[j] = y;
+        	   }
+        	   filter_x = medianFilter(arr_x, 10);
+        	   filter_y = medianFilter(arr_y, 10);
+
+        	   printf("The coordinates of X and Y are:=====> (%d, %d) \n", filter_x, filter_y);
+           }
+
+    return 0;
+}
+

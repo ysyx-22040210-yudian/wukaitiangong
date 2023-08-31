@@ -1,0 +1,11 @@
+14:44:55 **** Incremental Build of configuration Debug for project dhrystone ****
+make all 
+Invoking: GNU RISC-V Cross Print Size
+riscv-nuclei-elf-size --format=berkeley "dhrystone.elf"
+   text	   data	    bss	    dec	    hex	filename
+  40420	    576	  12608	  53604	   d164	dhrystone.elf
+Finished building: dhrystone.siz
+ 
+
+14:44:55 Build Finished. 0 errors, 0 warnings. (took 387ms)
+

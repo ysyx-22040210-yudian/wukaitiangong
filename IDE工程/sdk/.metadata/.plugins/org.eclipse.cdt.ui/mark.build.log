@@ -1,0 +1,11 @@
+14:06:02 **** Incremental Build of configuration Debug for project mark ****
+make all 
+Invoking: GNU RISC-V Cross Print Size
+riscv-nuclei-elf-size --format=berkeley "mark.elf"
+   text	   data	    bss	    dec	    hex	filename
+  59316	    572	   2388	  62276	   f344	mark.elf
+Finished building: mark.siz
+ 
+
+14:06:03 Build Finished. 0 errors, 0 warnings. (took 403ms)
+

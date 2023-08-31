@@ -1,0 +1,94 @@
+/*
+ * demo_nice.c
+ *
+ *  Created on: 2023年1月30日
+ *      Author: DELL
+ */
+
+
+// See LICENSE for license details.
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include "hbird_sdk_soc.h"
+
+#include "insn.h"
+
+int main(void)
+{
+   volatile unsigned int key_buf[4]={0x01234567,0x89abcdef,0xfedcba98, 0x76543210};
+   volatile unsigned int data_buf[4]={0x681edf34,0xd206965e,0x86b3e94f, 0x536e4246};
+   unsigned int begin_instret, end_instret, instret_normal, instret_nice;
+   unsigned int begin_cycle,   end_cycle,   cycle_normal,   cycle_nice;
+
+   printf("**********************************************\n");
+   printf("** begin to SM4 software compute\n");
+   begin_instret =  __get_rv_instret();
+   begin_cycle   =  __get_rv_cycle();
+
+   nice_case(key_buf, data_buf);
+
+   end_instret = __get_rv_instret();
+   end_cycle   = __get_rv_cycle();
+
+   instret_normal = end_instret - begin_instret;
+   cycle_normal = end_cycle - begin_cycle;
+   printf("\n\n");
+
+   printf("**********************************************\n");
+   printf("** begin to SM4 hardware compute\n");
+   begin_instret =  __get_rv_instret();
+   begin_cycle   =  __get_rv_cycle();
+
+   normal_case(key_buf, data_buf);
+
+   end_instret = __get_rv_instret();
+   end_cycle   = __get_rv_cycle();
+
+   instret_nice = end_instret - begin_instret;
+   cycle_nice   = end_cycle - begin_cycle;
+
+
+   printf("**********************************************\n");
+   printf("** performance list \n");
+
+   printf("\t normal: \n");
+   printf("\t      instret: %d, cycle: %d \n", instret_normal, cycle_normal);
+   printf("\t nice  : \n");
+   printf("\t      instret: %d, cycle: %d \n", instret_nice  , cycle_nice  );
+
+
+   printf("**********************************************\n\n");
+
+
+    printf("*     *  *     *   *****   *        *******   *** \n");
+    printf("**    *  *     *  *     *  *        *          *  \n");
+    printf("* *   *  *     *  *        *        *          *  \n");
+    printf("*  *  *  *     *  *        *        *****      *  \n");
+    printf("*   * *  *     *  *        *        *          *  \n");
+    printf("*    **  *     *  *     *  *        *          *  \n");
+    printf("*     *   *****    *****   *******  *******   *** \n");
+
+   printf("\n\n**********************************************");
+
+
+
+
+
+/*
+
+       int x,y;
+       _REG32(AXI_BASSE,0) = 1;
+
+       while(1){
+    	   x = _REG32A(AXI_BASSE + 4) ;
+    	   y = _REG32A(AXI_BASSE + 8) ;
+    	   printf("Target location is (%d, %d)\n", x, y);
+       }
+
+*/
+
+    return 0;
+}
+
+

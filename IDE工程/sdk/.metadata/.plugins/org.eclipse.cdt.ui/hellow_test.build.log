@@ -1,0 +1,11 @@
+14:46:54 **** Incremental Build of configuration Debug for project hellow_test ****
+make all 
+Invoking: GNU RISC-V Cross Print Size
+riscv-nuclei-elf-size --format=berkeley "hellow_test.elf"
+   text	   data	    bss	    dec	    hex	filename
+  17472	    116	   2356	  19944	   4de8	hellow_test.elf
+Finished building: hellow_test.siz
+ 
+
+14:46:55 Build Finished. 0 errors, 0 warnings. (took 404ms)
+

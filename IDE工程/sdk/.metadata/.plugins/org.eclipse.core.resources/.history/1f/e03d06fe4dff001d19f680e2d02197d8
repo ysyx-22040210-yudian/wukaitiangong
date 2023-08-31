@@ -1,0 +1,53 @@
+// See LICENSE for license details.
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include "hbird_sdk_soc.h"
+
+#include "insn.h"
+
+
+int main(void)
+{
+    srand(__get_rv_cycle()  | __get_rv_instret() | __RV_CSR_READ(CSR_MCYCLE));
+    uint32_t rval = rand();
+    rv_csr_t misa = __RV_CSR_READ(CSR_MISA);
+
+    printf("MISA: 0x%lx\r\n", misa);
+
+
+    for (int i = 0; i < 20; i ++) {
+        printf("%d: Hello World From RISC-V Processor!\r\n", i);
+    }
+    volatile unsigned int enc_data[4]={0};
+    volatile unsigned int key_buf[4]={0x01234567,0x89abcdef,0xfedcba98, 0x76543210};
+    int x,y;
+    volatile unsigned int datax_buf[4]={0};
+    volatile unsigned int datay_buf[4]={0};
+    volatile unsigned int enc_datax[4]={0};
+    volatile unsigned int enc_datay[4]={0};
+    int left, right, top, down;
+    int arr_x[1], arr_y[1];
+    int filter_x, filter_y;
+    int j;
+           _REG32(AXI_BASSE,0) = 1;
+
+           while(1){
+
+        	   x = _REG32A(AXI_BASSE + 4) ;
+        	   y = _REG32A(AXI_BASSE + 8) ;
+        	   datax_buf[2] = x;
+        	   datax_buf[3] = y;
+        	   custom_lkey((int)key_buf);
+        	   custom_ldata((int)datax_buf);
+        	   encrypt();
+        	   custom_sm4_res((int)enc_datax);
+
+
+        		 printf("%X%X%X%X", enc_datax[0],enc_datax[1],enc_datax[2],enc_datax[3]);
+        		 //printf("(%d,%d)\n", x,y);
+           }
+
+    return 0;
+}
+

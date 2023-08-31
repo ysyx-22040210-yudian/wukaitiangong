@@ -1,0 +1,11 @@
+14:35:40 **** Incremental Build of configuration Debug for project whetstone ****
+make all 
+Invoking: GNU RISC-V Cross Print Size
+riscv-nuclei-elf-size --format=berkeley "whetstone.elf"
+   text	   data	    bss	    dec	    hex	filename
+  57736	    940	   2616	  61292	   ef6c	whetstone.elf
+Finished building: whetstone.siz
+ 
+
+14:35:40 Build Finished. 0 errors, 0 warnings. (took 402ms)
+

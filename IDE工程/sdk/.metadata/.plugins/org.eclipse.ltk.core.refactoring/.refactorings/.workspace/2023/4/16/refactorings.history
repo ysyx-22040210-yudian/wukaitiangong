@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;test/Debug/test.verilog&apos;" deleteContents="false" description="Delete resource &apos;test/Debug/test.verilog&apos;" element1="/test/Debug/test.verilog" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1682167686578"/>
+</session>

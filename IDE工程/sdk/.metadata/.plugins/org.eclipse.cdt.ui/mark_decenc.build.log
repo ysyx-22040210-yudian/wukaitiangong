@@ -1,0 +1,11 @@
+06:02:38 **** Incremental Build of configuration Debug for project mark_decenc ****
+make all 
+Invoking: GNU RISC-V Cross Print Size
+riscv-nuclei-elf-size --format=berkeley "mark_decenc.elf"
+   text	   data	    bss	    dec	    hex	filename
+  60336	    580	   2388	  63304	   f748	mark_decenc.elf
+Finished building: mark_decenc.siz
+ 
+
+06:02:38 Build Finished. 0 errors, 0 warnings. (took 409ms)
+
